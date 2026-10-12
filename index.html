@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CineApp</title>
+	<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+	<header>
+		<div id="titulo">
+			<h1 class="whiteColor">Cine<span id="app">App</span></h1>
+			<h4 class="whiteColor">Tus películas favoritas, siempre a mano</h4>
+		</div>
+
+		<div id="buscador">
+			<form id="formBusqueda" autocomplete="off">
+				<input id="inputBusqueda" type="text" placeholder="Buscar película" name="busqueda">
+				<button type="submit">Buscar</button>
+			</form>
+		</div>
+
+		<div id="contadorFavoritos" title="Películas favoritas">
+			★ <span id="numFavoritos">0</span>
+		</div>
+	</header>
+
+	<div id="main">
+
+		<div id="subheader">
+			<div class="element">
+				<button id="btnTodos" class="filtro activo" type="button">Todos</button>
+				<button id="btnFavoritos" class="filtro" type="button">Favoritos</button>
+			</div>
+
+			<div class="element" id="contador">0 películas encontradas</div>
+
+			<div class="element">
+				<label for="selectOrden">Ordenar por:</label>
+				<select id="selectOrden">
+					<option value="recientes">Más recientes</option>
+					<option value="antiguas">Más antiguas</option>
+					<option value="az">Título (A-Z)</option>
+					<option value="za">Título (Z-A)</option>
+				</select>
+			</div>
+		</div>
+
+		<h2 class="tituloSeccion">Películas</h2>
+
+		<!-- Aquí JavaScript genera las tarjetas -->
+		<div id="catalogo"></div>
+
+	</div>
+
+	<footer>
+		CineApp · Disfruta, guarda y revive tus películas favoritas
+	</footer>
+
+	<!-- 1) Datos: debe cargarse ANTES que app.js -->
+	<script src="peliculas.js"></script>
+
+	<!-- 2) Lógica de la aplicación -->
+	<script src="app.js"></script>
+
+</body>
+</html>

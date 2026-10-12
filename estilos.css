@@ -1,0 +1,445 @@
+/* =========================================================
+   CineApp - estilos.css
+   ========================================================= */
+
+/* ---------- Variables de color ---------- */
+:root {
+	--navy:        #102a43;   /* azul oscuro principal (header, footer, tarjetas) */
+	--navy-hover:  #0b1f33;
+	--blue:        #2f7fd6;   /* azul del botón Buscar */
+	--blue-light:  #4d9fe0;   /* azul de "App" */
+	--bg:          #eef1f5;   /* gris claro de fondo */
+	--white:       #ffffff;
+	--border:      #d9e2ec;
+	--text:        #102a43;
+	--text-muted:  #627d98;
+	--gold:        #ffc857;   /* color de favoritos */
+}
+
+/* ---------- Reset básico ---------- */
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+	background: var(--bg);
+	color: var(--text);
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+header {
+	background: var(--navy);
+	color: var(--white);
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	padding: 14px 32px;
+	flex-wrap: wrap;
+}
+
+/* Título "CineApp" */
+#titulo {
+	flex: 0 0 auto;
+}
+
+#titulo h1 {
+	margin: 0;
+	font-size: 1.7rem;
+	font-weight: 700;
+	letter-spacing: .3px;
+	line-height: 1.1;
+	color: var(--white);
+}
+
+#titulo h1 #app {
+	color: var(--blue-light);
+}
+
+#titulo h4 {
+	margin: 2px 0 0 0;
+	font-size: .72rem;
+	font-weight: 400;
+	color: #bcccdc;
+}
+
+/* Buscador */
+#buscador {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+}
+
+#buscador form {
+	display: flex;
+	gap: 8px;
+	width: 100%;
+	max-width: 520px;
+}
+
+#buscador input {
+	flex: 1;
+	padding: 9px 14px;
+	border: none;
+	border-radius: 4px;
+	font-size: .85rem;
+	color: var(--text);
+	background: var(--white);
+	outline: none;
+}
+
+#buscador input::placeholder {
+	color: #9fb3c8;
+}
+
+#buscador button {
+	padding: 9px 22px;
+	border: none;
+	border-radius: 4px;
+	background: var(--blue);
+	color: var(--white);
+	font-size: .85rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background .2s ease;
+}
+
+#buscador button:hover {
+	background: #266bb5;
+}
+
+/* Contador de favoritos (estrella + número) */
+#contadorFavoritos {
+	flex: 0 0 auto;
+	margin-left: auto;
+	color: var(--gold);
+	font-size: .95rem;
+	font-weight: 600;
+	letter-spacing: 1px;
+	white-space: nowrap;
+	cursor: default;
+	user-select: none;
+}
+
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================= */
+#main {
+	flex: 1;
+	width: 100%;
+	max-width: 1150px;
+	margin: 0 auto;
+	padding: 22px 24px 40px;
+}
+
+/* ---------- Título de sección "Películas" ---------- */
+.tituloSeccion {
+	margin: 6px 0 0 0;
+	font-size: 1.35rem;
+	font-weight: 700;
+	color: var(--text);
+}
+
+/* ---------- Subheader (filtros / contador / orden) ---------- */
+#subheader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	flex-wrap: wrap;
+	margin-bottom: 14px;
+	font-size: .85rem;
+	font-weight: 400;
+	color: var(--text-muted);
+}
+
+#subheader .element:first-child {
+	display: flex;
+	gap: 8px;
+}
+
+#subheader .element:first-child button {
+	padding: 7px 18px;
+	border: 1px solid var(--border);
+	border-radius: 20px;
+	background: var(--white);
+	color: var(--text);
+	font-size: .82rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all .2s ease;
+}
+
+#subheader .element:first-child button:hover {
+	background: #e3e9f0;
+}
+
+/* Botón de filtro activo (controlado por JS con la clase .activo) */
+#subheader .element:first-child button.activo {
+	background: var(--navy);
+	border-color: var(--navy);
+	color: var(--white);
+}
+
+/* Texto "N películas encontradas" */
+#subheader .element:nth-child(2) {
+	font-size: .82rem;
+	color: var(--text-muted);
+}
+
+/* Select "Ordenar por" */
+#subheader .element:last-child {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: .82rem;
+	color: var(--text-muted);
+}
+
+#subheader select {
+	padding: 7px 12px;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	background: var(--white);
+	color: var(--text);
+	font-size: .82rem;
+	cursor: pointer;
+	outline: none;
+}
+
+/* ---------- Catálogo de películas ---------- */
+#catalogo {
+	margin-top: 12px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+	gap: 24px;
+}
+
+/* ---------- Tarjeta de película ---------- */
+.pelicula {
+	background: var(--white);
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 2px 6px rgba(16, 42, 67, .07);
+	display: flex;
+	flex-direction: column;
+	transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.pelicula:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 18px rgba(16, 42, 67, .15);
+}
+
+/* Zona superior: imagen con título de respaldo */
+.nombrePeli {
+	position: relative;
+	background: var(--navy);
+	aspect-ratio: 3 / 2;
+	overflow: hidden;
+}
+
+/* Imagen de portada (cubre el h3 si carga) */
+.nombrePeli img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 1;
+	display: block;
+}
+
+/* Título grande: queda detrás, solo visible si la imagen falla */
+.nombrePeli h3 {
+	position: absolute;
+	inset: 0;
+	margin: 0;
+	padding: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: var(--white);
+	font-size: 1.65rem;
+	font-weight: 700;
+	line-height: 1.2;
+	word-break: break-word;
+	z-index: 0;
+}
+
+/* Estrella clicable de la esquina */
+.btnEstrella {
+	position: absolute;
+	top: 8px;
+	right: 10px;
+	z-index: 2;
+	padding: 2px 4px;
+	border: none;
+	background: transparent;
+	color: var(--white);
+	font-size: 1.2rem;
+	line-height: 1;
+	cursor: pointer;
+	opacity: .85;
+	transition: transform .15s ease, color .15s ease, opacity .15s ease;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+}
+
+.btnEstrella:hover {
+	opacity: 1;
+	transform: scale(1.25);
+}
+
+.pelicula.esFavorita .btnEstrella {
+	color: var(--gold);
+	opacity: 1;
+}
+
+/* Zona inferior blanca con los datos */
+.detailsPeli {
+	padding: 14px 16px 10px;
+	flex: 1;
+}
+
+.namePeli {
+	margin: 0 0 4px 0;
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--text);
+}
+
+.annoPeli {
+	margin: 0 0 10px 0;
+	font-size: .78rem;
+	font-weight: 500;
+	color: var(--text-muted);
+}
+
+.generoPeli {
+	display: inline-block;
+	padding: 4px 12px;
+	border-radius: 20px;
+	background: #eef1f5;
+	color: #486581;
+	font-size: .72rem;
+	font-weight: 500;
+}
+
+/* Botón "+ Agregar a favoritos" */
+.buttonAddFav {
+	padding: 0 16px 16px;
+}
+
+.buttonAddFav button {
+	width: 100%;
+	padding: 9px 12px;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	background: var(--white);
+	color: var(--text);
+	font-size: .8rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all .2s ease;
+}
+
+.buttonAddFav button:hover {
+	background: #f0f4f8;
+	border-color: #bcccdc;
+}
+
+/* Botón inferior en estado "favorito" */
+.buttonAddFav button.activo {
+	background: #fff7e6;
+	border-color: var(--gold);
+	color: #8a6100;
+}
+
+/* ---------- Mensaje cuando no hay resultados ---------- */
+.sinResultados {
+	grid-column: 1 / -1;
+	padding: 50px 10px;
+	text-align: center;
+	color: var(--text-muted);
+	font-size: .95rem;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+	background: var(--navy);
+	color: #bcccdc;
+	text-align: center;
+	padding: 16px 20px;
+	font-size: .78rem;
+	letter-spacing: .3px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 820px) {
+
+	header {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 12px;
+		padding: 16px 20px;
+	}
+
+	#titulo {
+		text-align: center;
+	}
+
+	#buscador form {
+		max-width: 100%;
+	}
+
+	#contadorFavoritos {
+		margin-left: 0;
+		text-align: right;
+	}
+
+	#subheader {
+		justify-content: center;
+		text-align: center;
+	}
+
+	#subheader .element {
+		width: 100%;
+		justify-content: center;
+	}
+
+	#catalogo {
+		grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+		gap: 18px;
+	}
+
+	.nombrePeli h3 {
+		font-size: 1.35rem;
+	}
+}
+
+@media (max-width: 480px) {
+	#main {
+		padding: 18px 14px 30px;
+	}
+
+	#catalogo {
+		grid-template-columns: 1fr;
+	}
+}
