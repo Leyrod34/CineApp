@@ -227,11 +227,6 @@ function conectarEventos() {
 		renderizar();
 	});
 
-	$inputBusqueda.addEventListener('input', () => {
-		busqueda = $inputBusqueda.value.trim();
-		renderizar();
-	});
-
 	$btnTodos.addEventListener('click', () => {
 		filtro = 'todas';
 		renderizar();
