@@ -1,22 +1,16 @@
-/* =========================================================
-   CineApp - estilos.css
-   ========================================================= */
-
-/* ---------- Variables de color ---------- */
 :root {
-	--navy:        #102a43;   /* azul oscuro principal (header, footer, tarjetas) */
+	--navy:        #102a43;
 	--navy-hover:  #0b1f33;
-	--blue:        #2f7fd6;   /* azul del botón Buscar */
-	--blue-light:  #4d9fe0;   /* azul de "App" */
-	--bg:          #eef1f5;   /* gris claro de fondo */
+	--blue:        #2f7fd6;
+	--blue-light:  #4d9fe0;
+	--bg:          #eef1f5;
 	--white:       #ffffff;
 	--border:      #d9e2ec;
 	--text:        #102a43;
 	--text-muted:  #627d98;
-	--gold:        #ffc857;   /* color de favoritos */
+	--gold:        #ffc857;
 }
 
-/* ---------- Reset básico ---------- */
 * {
 	box-sizing: border-box;
 }
@@ -36,9 +30,6 @@ body {
 	flex-direction: column;
 }
 
-/* =========================================================
-   HEADER
-   ========================================================= */
 header {
 	background: var(--navy);
 	color: var(--white);
@@ -49,7 +40,6 @@ header {
 	flex-wrap: wrap;
 }
 
-/* Título "CineApp" */
 #titulo {
 	flex: 0 0 auto;
 }
@@ -74,7 +64,6 @@ header {
 	color: #bcccdc;
 }
 
-/* Buscador */
 #buscador {
 	flex: 1;
 	display: flex;
@@ -119,7 +108,6 @@ header {
 	background: #266bb5;
 }
 
-/* Contador de favoritos (estrella + número) */
 #contadorFavoritos {
 	flex: 0 0 auto;
 	margin-left: auto;
@@ -132,9 +120,6 @@ header {
 	user-select: none;
 }
 
-/* =========================================================
-   CONTENEDOR PRINCIPAL
-   ========================================================= */
 #main {
 	flex: 1;
 	width: 100%;
@@ -143,7 +128,6 @@ header {
 	padding: 22px 24px 40px;
 }
 
-/* ---------- Título de sección "Películas" ---------- */
 .tituloSeccion {
 	margin: 6px 0 0 0;
 	font-size: 1.35rem;
@@ -151,7 +135,6 @@ header {
 	color: var(--text);
 }
 
-/* ---------- Subheader (filtros / contador / orden) ---------- */
 #subheader {
 	display: flex;
 	align-items: center;
@@ -185,20 +168,17 @@ header {
 	background: #e3e9f0;
 }
 
-/* Botón de filtro activo (controlado por JS con la clase .activo) */
 #subheader .element:first-child button.activo {
 	background: var(--navy);
 	border-color: var(--navy);
 	color: var(--white);
 }
 
-/* Texto "N películas encontradas" */
 #subheader .element:nth-child(2) {
 	font-size: .82rem;
 	color: var(--text-muted);
 }
 
-/* Select "Ordenar por" */
 #subheader .element:last-child {
 	display: flex;
 	align-items: center;
@@ -218,7 +198,6 @@ header {
 	outline: none;
 }
 
-/* ---------- Catálogo de películas ---------- */
 #catalogo {
 	margin-top: 12px;
 	display: grid;
@@ -226,7 +205,6 @@ header {
 	gap: 24px;
 }
 
-/* ---------- Tarjeta de película ---------- */
 .pelicula {
 	background: var(--white);
 	border: 1px solid var(--border);
@@ -243,7 +221,6 @@ header {
 	box-shadow: 0 8px 18px rgba(16, 42, 67, .15);
 }
 
-/* Zona superior: imagen con título de respaldo */
 .nombrePeli {
 	position: relative;
 	background: var(--navy);
@@ -251,7 +228,6 @@ header {
 	overflow: hidden;
 }
 
-/* Imagen de portada (cubre el h3 si carga) */
 .nombrePeli img {
 	position: absolute;
 	inset: 0;
@@ -262,7 +238,6 @@ header {
 	display: block;
 }
 
-/* Título grande: queda detrás, solo visible si la imagen falla */
 .nombrePeli h3 {
 	position: absolute;
 	inset: 0;
@@ -280,7 +255,6 @@ header {
 	z-index: 0;
 }
 
-/* Estrella clicable de la esquina */
 .btnEstrella {
 	position: absolute;
 	top: 8px;
@@ -308,7 +282,6 @@ header {
 	opacity: 1;
 }
 
-/* Zona inferior blanca con los datos */
 .detailsPeli {
 	padding: 14px 16px 10px;
 	flex: 1;
@@ -338,7 +311,6 @@ header {
 	font-weight: 500;
 }
 
-/* Botón "+ Agregar a favoritos" */
 .buttonAddFav {
 	padding: 0 16px 16px;
 }
@@ -361,14 +333,12 @@ header {
 	border-color: #bcccdc;
 }
 
-/* Botón inferior en estado "favorito" */
 .buttonAddFav button.activo {
 	background: #fff7e6;
 	border-color: var(--gold);
 	color: #8a6100;
 }
 
-/* ---------- Mensaje cuando no hay resultados ---------- */
 .sinResultados {
 	grid-column: 1 / -1;
 	padding: 50px 10px;
@@ -377,9 +347,6 @@ header {
 	font-size: .95rem;
 }
 
-/* =========================================================
-   FOOTER
-   ========================================================= */
 footer {
 	background: var(--navy);
 	color: #bcccdc;
@@ -389,9 +356,6 @@ footer {
 	letter-spacing: .3px;
 }
 
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
 @media (max-width: 820px) {
 
 	header {

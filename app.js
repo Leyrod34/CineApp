@@ -1,22 +1,13 @@
-/* =========================================================
-   CineApp - app.js
-   Lee los datos desde la variable global PELICULAS
-   (definida en peliculas.js) y genera las tarjetas.
-   ========================================================= */
-
 'use strict';
 
-/* ---------- Constantes ---------- */
 const CLAVE_FAVORITOS = 'cineapp_favoritos';
 
-/* ---------- Estado de la aplicación ---------- */
-let peliculas = [];             // catálogo completo
-let favoritos = [];             // array de ids guardados
-let filtro    = 'todas';        // 'todas' | 'favoritos'
-let busqueda  = '';             // texto del buscador
-let orden     = 'recientes';    // recientes | antiguas | az | za
+let peliculas = [];
+let favoritos = [];
+let filtro    = 'todas';
+let busqueda  = '';
+let orden     = 'recientes';
 
-/* ---------- Referencias al DOM ---------- */
 const $catalogo      = document.getElementById('catalogo');
 const $contador      = document.getElementById('contador');
 const $numFavoritos  = document.getElementById('numFavoritos');
@@ -26,9 +17,6 @@ const $btnTodos      = document.getElementById('btnTodos');
 const $btnFavoritos  = document.getElementById('btnFavoritos');
 const $selectOrden   = document.getElementById('selectOrden');
 
-/* =========================================================
-   ARRANQUE
-   ========================================================= */
 document.addEventListener('DOMContentLoaded', iniciar);
 
 function iniciar() {
@@ -44,13 +32,9 @@ function iniciar() {
 	renderizar();
 }
 
-/* =========================================================
-   LECTURA DE LOS DATOS (desde peliculas.js)
-   ========================================================= */
 function cargarPeliculas() {
-	// PELICULAS es una variable global definida en peliculas.js
 	if (typeof PELICULAS === 'undefined') {
-		console.error('No se encontró la variable PELICULAS. ¿Cargaste peliculas.js antes que app.js?');
+		console.error('No se encontró la variable PELICULAS.');
 		return [];
 	}
 
@@ -59,7 +43,6 @@ function cargarPeliculas() {
 		return [];
 	}
 
-	// Copia para no modificar el original
 	return PELICULAS.slice();
 }
 
@@ -74,15 +57,11 @@ function mostrarError(mensaje) {
 	`;
 }
 
-/* =========================================================
-   FAVORITOS (localStorage)
-   ========================================================= */
 function cargarFavoritos() {
 	try {
 		const guardado = JSON.parse(localStorage.getItem(CLAVE_FAVORITOS));
 		return Array.isArray(guardado) ? guardado : [];
 	} catch (error) {
-		console.warn('Favoritos corruptos, se reinician.', error);
 		return [];
 	}
 }
@@ -91,7 +70,7 @@ function guardarFavoritos() {
 	try {
 		localStorage.setItem(CLAVE_FAVORITOS, JSON.stringify(favoritos));
 	} catch (error) {
-		console.warn('No se pudieron guardar los favoritos.', error);
+		console.warn('No se pudieron guardar los favoritos.');
 	}
 }
 
@@ -108,25 +87,20 @@ function alternarFavorito(id) {
 	renderizar();
 }
 
-/* =========================================================
-   FILTRADO Y ORDEN
-   ========================================================= */
 function normalizar(texto) {
 	return String(texto)
 		.toLowerCase()
 		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, ''); // quita tildes
+		.replace(/[\u0300-\u036f]/g, '');
 }
 
 function obtenerVisibles() {
 	let lista = peliculas.slice();
 
-	// Filtro Todos / Favoritos
 	if (filtro === 'favoritos') {
 		lista = lista.filter(p => esFavorita(p.id));
 	}
 
-	// Búsqueda por título
 	if (busqueda !== '') {
 		const consulta = normalizar(busqueda);
 		lista = lista.filter(p => normalizar(p.title).includes(consulta));
@@ -156,13 +130,9 @@ function ordenarLista(lista) {
 	}
 }
 
-/* =========================================================
-   RENDERIZADO
-   ========================================================= */
 function renderizar() {
 	const visibles = obtenerVisibles();
 
-	/* --- Tarjetas --- */
 	$catalogo.innerHTML = '';
 
 	if (visibles.length === 0) {
@@ -179,17 +149,14 @@ function renderizar() {
 		$catalogo.appendChild(fragmento);
 	}
 
-	/* --- Contadores --- */
 	const n = visibles.length;
 	$contador.textContent = `${n} ${n === 1 ? 'película encontrada' : 'películas encontradas'}`;
 	$numFavoritos.textContent = favoritos.length;
 
-	/* --- Botones de filtro --- */
 	$btnTodos.classList.toggle('activo', filtro === 'todas');
 	$btnFavoritos.classList.toggle('activo', filtro === 'favoritos');
 }
 
-/* Construye el DOM de una tarjeta desde un objeto del catálogo */
 function crearTarjeta(p) {
 	const fav = esFavorita(p.id);
 
@@ -198,7 +165,6 @@ function crearTarjeta(p) {
 	card.dataset.id = p.id;
 	if (fav) card.classList.add('esFavorita');
 
-	/* --- Cabecera con imagen --- */
 	const cabecera = document.createElement('div');
 	cabecera.className = 'nombrePeli';
 
@@ -221,7 +187,6 @@ function crearTarjeta(p) {
 
 	cabecera.append(img, h3, btnEstrella);
 
-	/* --- Detalles --- */
 	const detalles = document.createElement('div');
 	detalles.className = 'detailsPeli';
 
@@ -239,7 +204,6 @@ function crearTarjeta(p) {
 
 	detalles.append(nombre, anno, genero);
 
-	/* --- Botón de favoritos --- */
 	const pie = document.createElement('div');
 	pie.className = 'buttonAddFav';
 
@@ -255,25 +219,19 @@ function crearTarjeta(p) {
 	return card;
 }
 
-/* =========================================================
-   EVENTOS
-   ========================================================= */
 function conectarEventos() {
 
-	/* Buscador: Enter o clic en Buscar */
 	$formBusqueda.addEventListener('submit', (evento) => {
 		evento.preventDefault();
 		busqueda = $inputBusqueda.value.trim();
 		renderizar();
 	});
 
-	/* Buscador en vivo */
 	$inputBusqueda.addEventListener('input', () => {
 		busqueda = $inputBusqueda.value.trim();
 		renderizar();
 	});
 
-	/* Filtros */
 	$btnTodos.addEventListener('click', () => {
 		filtro = 'todas';
 		renderizar();
@@ -284,7 +242,6 @@ function conectarEventos() {
 		renderizar();
 	});
 
-	/* Orden */
 	$selectOrden.addEventListener('change', (evento) => {
 		orden = evento.target.value;
 		renderizar();

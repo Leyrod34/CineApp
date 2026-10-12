@@ -1,8 +1,3 @@
-/* =========================================================
-   Catálogo de películas de CineApp
-   La web lee esta variable PELICULAS desde app.js
-   ========================================================= */
-
 const PELICULAS = [
 	{
 		"id": 1,
