@@ -1,0 +1,86 @@
+[
+	{
+		"id": 1,
+		"title": "The Matrix",
+		"year": 1999,
+		"genre": "Ciencia ficción",
+		"image": "https://placehold.co/600x400/102a43/ffffff?text=The+Matrix"
+	},
+	{
+		"id": 2,
+		"title": "Inception",
+		"year": 2010,
+		"genre": "Ciencia ficción",
+		"image": "https://placehold.co/600x400/102a43/ffffff?text=Inception"
+	},
+	{
+		"id": 3,
+		"title": "Interstellar",
+		"year": 2014,
+		"genre": "Ciencia ficción",
+		"image": "https://placehold.co/600x400/102a43/ffffff?text=Interstellar"
+	},
+	{
+		"id": 4,
+		"title": "El Padrino",
+		"year": 1972,
+		"genre": "Drama",
+		"image": "https://placehold.co/600x400/102a43/ffffff?text=El+Padrino"
+	},
+	{
+		"id": 5,
+		"title": "Pulp Fiction",
+		"year": 1994,
+		"genre": "Crimen",
+		"image": "https://placehold.co/600x400/102a43/ffffff?text=Pulp+Fiction"
+	},
+	{
+		"id": 6,
+		"title": "El Señor de los Anillos",
+		"year": 2001,
+		"genre": "Fantasía",
+		"image": "https://placehold.co/600x400/102a43/ffffff?text=El+Se%C3%B1or+de+los+Anillos"
+	},
+	{
+		"id": 7,
+		"title": "Parasite",
+		"year": 2019,
+		"genre": "Drama",
+		"image": "https://placehold.co/600x400/102a43/ffffff?text=Parasite"
+	},
+	{
+		"id": 8,
+		"title": "Gladiator",
+		"year": 2000,
+		"genre": "Acción",
+		"image": "https://placehold.co/600x400/102a43/ffffff?text=Gladiator"
+	},
+	{
+		"id": 9,
+		"title": "El Laberinto del Fauno",
+		"year": 2006,
+		"genre": "Fantasía",
+		"image": "https://placehold.co/600x400/102a43/ffffff?text=El+Laberinto+del+Fauno"
+	},
+	{
+		"id": 10,
+		"title": "Toy Story",
+		"year": 1995,
+		"genre": "Animación",
+		"image": "https://placehold.co/600x400/102a43/ffffff?text=Toy+Story"
+	},
+	{
+		"id": 11,
+		"title": "Forrest Gump",
+		"year": 1994,
+		"genre": "Drama",
+		"image": "https://placehold.co/600x400/102a43/ffffff?text=Forrest+Gump"
+	},
+	{
+		"id": 12,
+		"title": "El Club de la Lucha",
+		"year": 1999,
+		"genre": "Drama",
+		"image": "https://placehold.co/600x400/102a43/ffffff?text=El+Club+de+la+Lucha"
+	}
+]

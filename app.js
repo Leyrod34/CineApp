@@ -1,6 +1,7 @@
 'use strict';
 
 const CLAVE_FAVORITOS = 'cineapp_favoritos';
+const RUTA_JSON       = 'peliculas.json';
 
 let peliculas = [];
 let favoritos = [];
@@ -19,12 +20,13 @@ const $selectOrden   = document.getElementById('selectOrden');
 
 document.addEventListener('DOMContentLoaded', iniciar);
 
-function iniciar() {
+async function iniciar() {
 	favoritos = cargarFavoritos();
-	peliculas = cargarPeliculas();
 
-	if (peliculas.length === 0) {
-		mostrarError('No se encontró el catálogo de películas.');
+	try {
+		peliculas = await cargarPeliculas();
+	} catch (error) {
+		mostrarError(error);
 		return;
 	}
 
@@ -32,27 +34,28 @@ function iniciar() {
 	renderizar();
 }
 
-function cargarPeliculas() {
-	if (typeof PELICULAS === 'undefined') {
-		console.error('No se encontró la variable PELICULAS.');
-		return [];
+async function cargarPeliculas() {
+	const respuesta = await fetch(RUTA_JSON);
+
+	if (!respuesta.ok) {
+		throw new Error('No se pudo leer ' + RUTA_JSON + ' (HTTP ' + respuesta.status + ')');
 	}
 
-	if (!Array.isArray(PELICULAS)) {
-		console.error('PELICULAS debe ser un array.');
-		return [];
+	const datos = await respuesta.json();
+
+	if (!Array.isArray(datos)) {
+		throw new Error('El archivo ' + RUTA_JSON + ' debe contener un array de películas.');
 	}
 
-	return PELICULAS.slice();
+	return datos;
 }
 
-function mostrarError(mensaje) {
-	console.error(mensaje);
+function mostrarError(error) {
+	console.error(error);
 	$catalogo.innerHTML = `
 		<p class="sinResultados">
-			⚠️ ${mensaje}<br>
-			<small>Revisa que <code>peliculas.js</code> esté en la misma carpeta
-			y se cargue antes de <code>app.js</code>.</small>
+			⚠️ No se pudo cargar el catálogo de películas.<br>
+			<small>${error.message}</small><br><br>
 		</p>
 	`;
 }
